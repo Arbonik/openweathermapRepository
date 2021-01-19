@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="weatherData"
+            type="com.castprogramms.openweathermap.database.data.weather.UnitSpecificCurrentWeatherEntry" />
+    </data>
+
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/weatherIcon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
+
+                <TextView
+                    android:id="@+id/type_weather"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@{weatherData.conditionText}"
+                    android:textColor="@color/txt_grey"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    tools:text="Ясное небо" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/now_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{Double.toString(weatherData.temperature).concat(@string/space).concat(@string/degrees_fahrenheit)}"
+                android:textColor="@color/main_blue"
+                android:textSize="56sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                tools:text="-24" />
+
+            <LinearLayout
+                android:id="@+id/name_param"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/now_param"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/now_temp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="2"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="Ощущается"
+                    android:textColor="@color/txt_grey"
+                    android:textSize="20sp" />
+
+                <!--<TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="2"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:textColor="@color/txt_grey"
+                    android:textSize="20sp"
+                    tools:text="Влажность" />-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="2"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="Ветер"
+                    android:textColor="@color/txt_grey"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="2"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="Скорость ветра"
+                    android:textColor="@color/txt_grey"
+                    android:textSize="20sp" />
+                <!--
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="left"
+                                android:layout_weight="2"
+                                android:paddingTop="4dp"
+                                android:paddingBottom="4dp"
+                                android:textColor="@color/txt_grey"
+                                android:textSize="20sp"
+                                android:text="Осадки" />
+                -->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="2"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="Видимость"
+                    android:textColor="@color/txt_grey"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/now_param"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="100dp"
+                android:orientation="vertical"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/now_temp">
+
+                <TextView
+                    android:id="@+id/now_feeling_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:textColor="@color/txt_grey"
+                    android:text="@{Double.toString(weatherData.temperature).concat(@string/space).concat(@string/degrees_fahrenheit)}"
+                    android:textSize="20sp"
+                    tools:text="-20" />
+
+                <!--  <TextView
+                      android:id="@+id/now_wet"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="left"
+                      android:layout_weight="1"
+                      android:paddingTop="4dp"
+                      android:paddingBottom="4dp"
+                      android:textColor="@color/txt_grey"
+                      android:textSize="20sp"
+                      tools:text="90%" />-->
+
+                <TextView
+                    android:id="@+id/now_wind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:textColor="@color/txt_grey"
+                    android:textSize="20sp"
+                    android:text="@{weatherData.windDirection}"
+                    tools:text="Ю-З" />
+
+                <TextView
+                    android:id="@+id/now_speed_wind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:textColor="@color/txt_grey"
+                    android:text="@{Double.toString(weatherData.windSpeed).concat(@string/space).concat(@string/metric_wind_speed)}"                android:textSize="20sp"
+                    tools:text="4 м/с" />
+
+                <!-- <TextView
+                     android:id="@+id/now_volume"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="left"
+                     android:layout_weight="1"
+                     android:paddingTop="4dp"
+                     android:text="@{Double.toString(weatherData.precipitationVolume).concat(@string/space).concat(@string/metric_height)}"
+                     android:paddingBottom="4dp"
+                     android:textColor="@color/txt_grey"
+                     android:textSize="20sp"
+                     tools:text="1000 мм" />
+     -->
+                <TextView
+                    android:id="@+id/now_visibility"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:text="@{Double.toString(weatherData.visibilityDistance).concat(@string/space).concat(@string/metric_height)}"                android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:textColor="@color/txt_grey"
+                    android:textSize="20sp"
+                    tools:text="10 700 мм" />
+
+            </LinearLayout>
+
+     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

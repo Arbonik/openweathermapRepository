@@ -1,0 +1,100 @@
+<resources>
+    <string name="app_name">openweathermap</string>
+    <string name="all_title">Погода</string>
+    <string name="title_activity_main">Погода</string>
+    <string name="title_now">Сегодня</string>
+    <string name="title_week">Неделя</string>
+    <string name="title_map">Карта</string>
+    <string name="title_day">Погода</string>
+    <string name="title_settings">Настройки</string>
+    <string name="feel">Ощущается</string>
+
+    <string name="messages_header">Сообщения</string>
+    <string name="metric_header">Единицы измерения</string>
+    <string name="city_header">Город</string>
+
+    <!-- Messages Preferences -->
+    <string name="city_title">Ваш город</string>
+    <!--    <string name="reply_title">Default reply action</string>-->
+
+    <!-- Sync Preferences -->
+    <string name="geolocation_title">Не использовать геолокацию</string>
+    <string name="attachment_title">Загрузить входящие вложения</string>
+    <string name="attachment_summary_on">Автоматическая загрузка вложений для входящих сообщений электронной почты</string>
+
+    <string name="attachment_summary_off">Загружать вложения только при запросе вручную</string>
+
+    <string name="param_wet">Влажность</string>
+    <string name="param_speed_wind">Скорость ветра</string>
+    <string name="param_wind">Ветер</string>
+    <string name="param_visibility">Видимость</string>
+
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyA4z4rgVe678eDys6TY4yk2VPw7ea8e17c</string>
+
+    <string name="metric_wind_speed">м/с</string>
+    <string name="metric_height">м</string>
+    <string name="degrees_celsius" translatable="false">℃</string>
+    <string name="degrees_fahrenheit" translatable="false">℉</string>
+    <string name="space" translatable="false">\u0020</string>
+
+    <string-array name="entries_lang">
+        <item>Язык аппарата</item>
+        <item>Английский</item>
+        <item>Русский</item>
+    </string-array>
+
+    <string-array name="entry_values_lang">
+        <item>default</item>
+        <item>en</item>
+        <item>ru</item>
+    </string-array>
+
+    <string name="LangDialogTitle">Выберите язык:</string>
+    <string name="LangCateroryTitle">Язык</string>
+    <string name="LangTitle">Язык приложения</string>
+    <string name="LangSummary">Необходимо перезапустить приложение для принятия изменений.</string>
+
+    <string-array name="metric_names">
+        <item>℃</item>
+        <item>℉</item>
+        <item>K</item>
+    </string-array>
+
+    <string-array name="entry_values_metric">
+        <item>c</item>
+        <item>f</item>
+        <item>k</item>
+    </string-array>
+
+    <string name="your_city">Введите свой город:</string>
+    <string name="degrees">Градусы</string>
+
+    <string name="sever">Северный</string>
+    <string name="sever_vostok">Северо-восточный</string>
+    <string name="vostok">Восточный</string>
+    <string name="ygo_vostok">Юго-восточный</string>
+    <string name="yg">Южный</string>
+    <string name="ygo_zapad">Юго-западный</string>
+    <string name="zapad">Западный</string>
+    <string name="sever_zapad">Северо-западный</string>
+    <string name="lang_key" translatable="false">lang</string>
+    <string name="geo_key" translatable="false">geo</string>
+    <string name="city_key" translatable="false">city</string>
+    <string name="city_delegate">Указать город</string>
+    <string name="with_location" translatable="true">По геолокации</string>
+    <string name="metric_key" translatable="false">metric</string>
+    <string name="lang" translatable="false">lang</string>
+    <string name="choose_metric">Choose metric</string>
+    <string name="title_activity_login">OpenWeatherMap</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="logout">Выйти</string>
+    <string name="logout_key" translatable="false">logout_key</string>
+    <string name="success_register">Вы успешно зарегестрированы!.</string>
+</resources>

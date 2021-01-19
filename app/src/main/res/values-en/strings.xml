@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">openweathermap</string>
+    <string name="title_activity_main">Weather</string>
+    <string name="title_now">Today</string>
+    <string name="title_week">Week</string>
+    <string name="title_map">Map</string>
+    <string name="title_day">Weather</string>
+    <string name="title_settings">Settings</string>
+    <string name="feel">Feel</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="metric_header">Metric</string>
+    <string name="city_header">City</string>
+
+    <!-- Messages Preferences -->
+
+    <string name="city_title">Your signature</string>
+
+    <!-- Sync Preferences -->
+    <string name="geolocation_title">Don\'t use your geolocation</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <string name="param_wet">Humidity</string>
+    <string name="param_speed_wind">Wind speed</string>
+    <string name="param_wind">Wind</string>
+    <string name="param_visibility">Visibility</string>
+
+    <string name="metric_wind_speed">m/c</string>
+    <string name="metric_height">m</string>
+
+    <string name="LangCateroryTitle">Language</string>
+    <string name="LangTitle">Application language</string>
+    <string name="LangDialogTitle">Choose a language:</string>
+    <string name="LangSummary">You must restart the application to accept the changes.</string>
+
+    <string-array name="entries_lang">
+        <item>Device Language</item>
+        <item>English</item>
+        <item>Russian</item>
+    </string-array>
+    <string name="your_city">Indicate your city</string>
+    <string name="degrees">Degrees</string>
+
+    <string name="sever">North</string>
+    <string name="sever_vostok">North-East</string>
+    <string name="vostok">East</string>
+    <string name="ygo_vostok">South-East</string>
+    <string name="yg">South</string>
+    <string name="ygo_zapad">South-West</string>
+    <string name="zapad">West</string>
+    <string name="sever_zapad">North-West</string>
+    <string name="all_title">WeatherApp</string>
+    <string name="choose_metric">Choose metric</string>
+    <string name="title_activity_login">Authefication</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">Welcome !</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">Login failed</string>
+    <string name="with_location">Use geolocation</string>
+    <string name="city_delegate">Put City</string>
+    <string name="logout">Logout</string>
+    <string name="success_register">Account created!</string>
+</resources>

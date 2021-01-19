@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "52871225510",
+    "project_id": "openweathermap-ea6c2",
+    "storage_bucket": "openweathermap-ea6c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52871225510:android:0dc5de1399b45f16d95467",
+        "android_client_info": {
+          "package_name": "com.castprogramms.openweathermap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "52871225510-5an3ecolalvqbstdj0a3cle7o7piusau.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9H1j6G20mW_Xnum7N4Mg1SCKlzT97-cY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "52871225510-5an3ecolalvqbstdj0a3cle7o7piusau.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
