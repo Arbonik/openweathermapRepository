@@ -21,12 +21,6 @@ class DataRepository(
 
     val database = WeatherApplication.database.weatherDao()
 
-    suspend fun getTrack(): LiveData<MutableList<MyLocation>> {
-        val data = MutableLiveData<MutableList<MyLocation>>()
-        data.value = this.locationDao.getAllLocation().toMutableList()
-        return data
-    }
-
     override suspend fun getCurrentUnitWeather() {
         try {
             var response: Call<WeathermanResponse>? = null

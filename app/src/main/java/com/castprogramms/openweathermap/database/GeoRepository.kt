@@ -19,16 +19,16 @@ class GeoRepository(val context: Context) : GeoTracker, LocationListener{
 
     private val fusedLocationClient: FusedLocationProviderClient =
         LocationServices.getFusedLocationProviderClient(context)
-
     private var locationManager: LocationManager
-
+    val locations = mutableListOf<MyLocation>()
+    val mutableLiveDataLocations = MutableLiveData<MutableList<MyLocation>>(locations)
     private val geoCurrentPositionLive = MutableLiveData<Location>()
     override val currentGeoPosition: LiveData<Location> = geoCurrentPositionLive
 
     var isTracking = false
 
-    override suspend fun getAllGEOPosition(): LiveData<List<MyLocation>> {
-        return WeatherApplication.database.locationDao().getAllLocation()
+    override fun getAllGEOPosition(): MutableLiveData<MutableList<MyLocation>> {
+        return mutableLiveDataLocations
     }
 
     init {
@@ -50,6 +50,7 @@ class GeoRepository(val context: Context) : GeoTracker, LocationListener{
                 if (it.isSuccessful && it.result != null) {
                     geoCurrentPositionLive.value = it.result
                 }
+                
             }
             locationManager.requestLocationUpdates(
                 LocationManager.GPS_PROVIDER,
@@ -65,6 +66,7 @@ class GeoRepository(val context: Context) : GeoTracker, LocationListener{
     }
 
     override fun onLocationChanged(location: Location) {
-
+        locations.add(MyLocation(location))
+        mutableLiveDataLocations.value = locations
     }
 }
