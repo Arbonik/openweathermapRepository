@@ -1,5 +1,6 @@
 package com.castprogramms.openweathermap.database.data.map
 
+import android.location.Location
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -19,4 +20,5 @@ class MyLocation (
             return false
     }
 
+    constructor(location : Location) :this(location.latitude, location.longitude)
 }
