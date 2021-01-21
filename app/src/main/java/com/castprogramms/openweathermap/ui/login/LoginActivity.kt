@@ -78,8 +78,9 @@ class LoginActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT
                             ).show()
                         } else {
+                            if (task.exception != null)
                             Toast.makeText(
-                                baseContext, resources.getString(R.string.welcome),
+                                baseContext, task.exception!!.message.toString(),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -88,6 +89,10 @@ class LoginActivity : AppCompatActivity() {
                         auth.signInWithEmailAndPassword(userLogin, userPass)
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
+                                    Toast.makeText(
+                                        baseContext, resources.getString(R.string.welcome),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                     successLogin(auth.currentUser)
                                 }
                             }
