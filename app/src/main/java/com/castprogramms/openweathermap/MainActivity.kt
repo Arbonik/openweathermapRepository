@@ -1,11 +1,14 @@
 package com.castprogramms.openweathermap
 
+import android.app.ActionBar.DISPLAY_SHOW_TITLE
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toolbar
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.ActionBar.DISPLAY_SHOW_TITLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuItemCompat
 import androidx.navigation.findNavController
@@ -40,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         val navController = findNavController(R.id.nav_host_fragment)
+
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_now,
@@ -48,6 +52,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_settings
             )
         )
+        //val actBar : ActionBar = ActionBar.DISPLAY_SHOW_TITLE(actionBar?.setTitle("scdvs"))
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

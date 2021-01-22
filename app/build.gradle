@@ -44,8 +44,9 @@ android {
 }
 
 dependencies {
+
     //googleMap
-    implementation 'com.google.android.gms:play-services-location:17.1.0'
+    implementation 'com.google.android.gms:play-services-location:+'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
     //database
@@ -95,5 +96,12 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.3.0'
     androidTestImplementation 'androidx.test:rules:1.3.0'
     androidTestImplementation 'com.21buttons:fragment-test-rule:2.0.1'
+    debugImplementation 'com.21buttons:fragment-test-rule-extras:2.0.1'
+
+    androidTestImplementation 'org.mockito:mockito-core:3.7.7'
+    androidTestImplementation 'org.mockito:mockito-android:3.7.7'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0"
 
 }

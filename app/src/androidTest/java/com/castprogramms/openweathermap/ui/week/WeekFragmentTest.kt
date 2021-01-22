@@ -18,16 +18,17 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class WeekFragmentTest{
-    @Rule
+class WeekFragmentTest {
+    @get: Rule
     @JvmField
-    val fragmentTestRule : FragmentTestRule<MainActivity, WeekFragment> =
+    val fragmentTestRule: FragmentTestRule<MainActivity, WeekFragment> =
         FragmentTestRule(MainActivity::class.java, WeekFragment::class.java)
 
-/*    @Test
+    @Test
     @Throws(Exception::class)
-    fun recyclerView(){
+    fun recyclerView() {
         onView(withId(R.id.recycler_view))
             .perform(actionOnItemAtPosition<DayAdapter.DayHolder>(0, click()))
-    }*/
+
+    }
 }
