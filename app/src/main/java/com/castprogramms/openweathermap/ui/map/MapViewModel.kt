@@ -16,43 +16,10 @@ import kotlinx.coroutines.launch
 
 class MapViewModel(application: Application) : AndroidViewModel(application) {
 
-    val gpsTracker : GeoTracker = GeoRepository(getApplication())
+    val gpsTracker  = WeatherApplication.geoRepository
     val mutableLiveDataThisPosition = gpsTracker.currentGeoPosition
-
-    var mutableLiveLocations : MutableLiveData<MutableList<MyLocation>>
-
-    init {
-        mutableLiveLocations = gpsTracker.getAllGEOPosition()
-    }
-    var isTracking = false
-    val mutableLiveDataTracking = MutableLiveData<Boolean>().apply {
-        value = isTracking
-    }
-    lateinit var dataLiveData : LiveData<List<MyLocation>>
-
-    var firstLaunch = true
-
-    fun updateLocationData(){
-        val repository = WeatherApplication.database
-        viewModelScope.launch{
-            dataLiveData = repository.locationDao().getAllLocation()
-
-//            Log.e("Test", locations.size.toString())
-        }
-    }
-
-    fun addLocation(location: MyLocation){
-//        locations.add(MyLocation(location.latitude, location.longitude))
-//        mutableLiveLocations.value = locations
-        val database = WeatherApplication.database
-        viewModelScope.launch {
-            database.locationDao().addLocation(location)
-        }
-    }
-
-    fun startTracking(context: Context){
-//        listener = MyLocationListener.setUpLocationListener(context, this)
-    }
+    val mutableLiveDataTracking : MutableLiveData<Boolean> = gpsTracker.isListenerActive
+    var dataLiveData : LiveData<List<MyLocation>> = WeatherApplication.database.locationDao().getAllLocation()
 
     fun covertToLatLngList(mutableList: List<MyLocation>):MutableList<LatLng>{
         val mutableListLatLng = mutableListOf<LatLng>()
@@ -63,27 +30,15 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
         }
         return mutableListLatLng
     }
-
-    fun setIsTracking(isTracking: Boolean, context: Context){
-        isNotFirstLaunchFrag = true
-        this.isTracking = isTracking
-        mutableLiveDataTracking.value = this.isTracking
-        if (isTracking){
-//            clear()
-            startTracking(context)
-        }
-        else{
-            stopTracking()
+    fun startTracking(){
+        gpsTracker.startListener()
+        viewModelScope.launch {
+            WeatherApplication.database.locationDao().deleteAllLocation()
         }
     }
 
     fun stopTracking(){
-//        listener.stopTracking(listener)
-        firstLaunch = true
+        gpsTracker.stopListener()
     }
 
-    fun getIsFirstLaunchFrag() = isNotFirstLaunchFrag
-    companion object{
-        var isNotFirstLaunchFrag = false
-    }
 }

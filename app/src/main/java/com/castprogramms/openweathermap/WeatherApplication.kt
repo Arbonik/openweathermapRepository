@@ -30,7 +30,6 @@ class WeatherApplication : Application() {
 
     override fun onCreate() {
         appContext = applicationContext
-        application = this
         lang = sharedPreferences.getString("lang", osLang).toString()
         if (lang == osLang)
             lang = resources.configuration.locale.country
@@ -73,7 +72,6 @@ class WeatherApplication : Application() {
 
     companion object {
         private lateinit var appContext: Context
-        lateinit var application: WeatherApplication
         val database: AppDatabase by lazy {
             val LOCK = Any()
             synchronized(LOCK) {

@@ -9,6 +9,4 @@ interface GeoTracker {
 
     val currentGeoPosition : LiveData<Location>
 
-    fun getAllGEOPosition() : MutableLiveData<MutableList<MyLocation>>
-
 }
