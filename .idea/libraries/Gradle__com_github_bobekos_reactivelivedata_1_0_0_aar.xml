@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.bobekos:reactivelivedata:1.0.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bd996128695fb3c5c75cc32ce9e0d264/jetified-reactivelivedata-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bd996128695fb3c5c75cc32ce9e0d264/jetified-reactivelivedata-1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bd996128695fb3c5c75cc32ce9e0d264/jetified-reactivelivedata-1.0.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.bobekos/reactivelivedata/1.0.0/e1bbe32e2d4c2fcb81831f38214ae6580554a261/reactivelivedata-1.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.bobekos/reactivelivedata/1.0.0/2b8ac958dea48e6dabe5a344aeb2bd01a1a70718/reactivelivedata-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

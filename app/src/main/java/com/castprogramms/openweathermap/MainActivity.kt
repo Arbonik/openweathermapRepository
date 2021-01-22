@@ -52,6 +52,9 @@ class MainActivity : AppCompatActivity() {
     fun setNewTitle(title : String) {
         setTitle(title)
     }
+    fun setNewTitle(title : Int) {
+        setTitle(title)
+    }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

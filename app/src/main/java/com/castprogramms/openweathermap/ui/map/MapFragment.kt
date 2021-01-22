@@ -12,8 +12,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
+import com.castprogramms.openweathermap.MainActivity
 import com.castprogramms.openweathermap.R
 import com.castprogramms.openweathermap.WeatherApplication
+import com.castprogramms.openweathermap.database.DataRepository
+import com.castprogramms.openweathermap.network.LocateFormat
+import com.castprogramms.openweathermap.ui.week.WeekFragment
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -99,5 +103,14 @@ class MapFragment : Fragment() {
             })
         }
         return view
+    }
+    override fun onResume() {
+        super.onResume()
+        val locate = DataRepository.QUERY_PARAM.locateFormat
+        when (locate){
+            is LocateFormat.City ->  (requireActivity() as MainActivity).setNewTitle(R.string.title_map)
+            is LocateFormat.Geolocation -> (requireActivity() as MainActivity).setNewTitle(R.string.title_map)
+        }
+
     }
 }

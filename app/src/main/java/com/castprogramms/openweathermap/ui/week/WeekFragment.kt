@@ -9,8 +9,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.castprogramms.openweathermap.DayAdapter
+import com.castprogramms.openweathermap.MainActivity
 import com.castprogramms.openweathermap.R
+import com.castprogramms.openweathermap.database.DataRepository
 import com.castprogramms.openweathermap.database.data.weather.ForecastWeatherData
+import com.castprogramms.openweathermap.network.LocateFormat
 
 
 class WeekFragment : Fragment() {
@@ -45,5 +48,14 @@ class WeekFragment : Fragment() {
 
     companion object {
         const val ITEM_NUMBER_TAG = "itemNumberTag"
+    }
+    override fun onResume() {
+        super.onResume()
+        val locate = DataRepository.QUERY_PARAM.locateFormat
+        when (locate){
+            is LocateFormat.City ->  (requireActivity() as MainActivity).setNewTitle(locate.city)
+            is LocateFormat.Geolocation -> (requireActivity() as MainActivity).setNewTitle("${locate.longitude} ${locate.latitude}")
+        }
+
     }
 }

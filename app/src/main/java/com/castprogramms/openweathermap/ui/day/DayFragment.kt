@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.castprogramms.openweathermap.MainActivity
 import com.castprogramms.openweathermap.R
 import com.castprogramms.openweathermap.database.DataRepository
 import com.castprogramms.openweathermap.database.data.IconReform
 import com.castprogramms.openweathermap.database.data.weather.BossForecastWeatherData
 import com.castprogramms.openweathermap.databinding.FragmentNowBinding
+import com.castprogramms.openweathermap.network.LocateFormat
 import com.castprogramms.openweathermap.tools.WeatherConverter
 import com.castprogramms.openweathermap.ui.week.WeekFragment
 
@@ -44,10 +46,13 @@ class DayFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(DayViewModel::class.java)
 
     }
-
     override fun onResume() {
         super.onResume()
-        val number : Int = arguments?.getInt(WeekFragment.ITEM_NUMBER_TAG) ?: 0
-        viewModel.load(number)
+        val locate = DataRepository.QUERY_PARAM.locateFormat
+        when (locate){
+            is LocateFormat.City ->  (requireActivity() as MainActivity).setNewTitle(locate.city)
+            is LocateFormat.Geolocation -> (requireActivity() as MainActivity).setNewTitle("${locate.longitude} ${locate.latitude}")
+        }
+
     }
 }

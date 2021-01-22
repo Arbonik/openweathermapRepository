@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.edit
 import androidx.preference.PreferenceFragmentCompat
+import com.castprogramms.openweathermap.MainActivity
 import com.castprogramms.openweathermap.R
 import com.castprogramms.openweathermap.database.DataRepository
 import com.castprogramms.openweathermap.network.LangFormat
@@ -105,6 +106,14 @@ class SettingsFragment : PreferenceFragmentCompat(),
         preferenceManager.sharedPreferences.registerOnSharedPreferenceChangeListener(this)
 
     }
+    override fun onResume() {
+        super.onResume()
+        val locate = DataRepository.QUERY_PARAM.locateFormat
+        when (locate){
+            is LocateFormat.City ->  (requireActivity() as MainActivity).setNewTitle(R.string.title_settings)
+            is LocateFormat.Geolocation -> (requireActivity() as MainActivity).setNewTitle(R.string.title_settings)
+        }
+    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
@@ -127,4 +136,5 @@ class SettingsFragment : PreferenceFragmentCompat(),
         super.onDestroy()
         preferenceManager.sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
     }
+
 }
