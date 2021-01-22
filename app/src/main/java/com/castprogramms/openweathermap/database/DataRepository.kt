@@ -1,9 +1,11 @@
 package com.castprogramms.openweathermap.database
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.castprogramms.openweathermap.WeatherApplication
 import com.castprogramms.openweathermap.database.data.weather.ForecastWeatherAdapter
 import com.castprogramms.openweathermap.database.data.weather.ForecastWeatherData
+import com.castprogramms.openweathermap.database.data.weather.UnitSpecificCurrentWeatherEntry
 import com.castprogramms.openweathermap.database.data.weather.WeatherData
 import com.castprogramms.openweathermap.database.data.weather.forecast.ForecastWeather
 import com.castprogramms.openweathermap.database.data.weather.oneDay.WeathermanResponse
@@ -16,7 +18,7 @@ class DataRepository() : WeatherRepository {
 
     val database = WeatherApplication.database.weatherDao()
 
-    override suspend fun getCurrentUnitWeather() {
+    override suspend fun getCurrentUnitWeather() : WeatherData?{
         try {
             var response: Call<WeathermanResponse>? = null
 
@@ -29,21 +31,23 @@ class DataRepository() : WeatherRepository {
             }
 
             if (QUERY_PARAM.locateFormat is LocateFormat.Geolocation) {
-                response = Reference.WHEATHER.weatherUnit(
+                response = Reference.WHEATHER.weatherUnitByCoord(
                     (QUERY_PARAM.locateFormat as LocateFormat.Geolocation).latitude.toString(),
                     (QUERY_PARAM.locateFormat as LocateFormat.Geolocation).longitude.toString(),
                     QUERY_PARAM.langFormat.format,
                     QUERY_PARAM.tempFormat.format
                 )
             }
-            val weathermanResponse = response?.execute()?.body()
-
-
-            if (weathermanResponse != null)
-                database.insert(WeatherData(weathermanResponse))
+            val weathermanResponse = response
+            Log.d("IS RESPONSE", weathermanResponse?.request()?.url().toString())
+            Log.d("IS RESPONSE", weathermanResponse.toString())
+            val r = weathermanResponse?.execute()?.body()
+            if (r != null)
+                database.insert(WeatherData(r))
         } catch (e: IOException) {
         } catch (e: UnknownHostException) {
         }
+        return database.getWeathersUnit()
     }
 
     override suspend fun getCurrentMoreWeather(): LiveData<List<ForecastWeatherData?>> {
@@ -59,7 +63,7 @@ class DataRepository() : WeatherRepository {
             }
 
             if (QUERY_PARAM.locateFormat is LocateFormat.Geolocation) {
-                response = Reference.WHEATHER.forecastWeather(
+                response = Reference.WHEATHER.forecastWeatherByCoord(
                     (QUERY_PARAM.locateFormat as LocateFormat.Geolocation).latitude.toString(),
                     (QUERY_PARAM.locateFormat as LocateFormat.Geolocation).longitude.toString(),
                     QUERY_PARAM.langFormat.format,

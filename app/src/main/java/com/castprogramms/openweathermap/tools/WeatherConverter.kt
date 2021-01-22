@@ -1,6 +1,5 @@
 package com.castprogramms.openweathermap.tools
 
-import android.content.Context
 import com.castprogramms.openweathermap.R
 
 class WeatherConverter {

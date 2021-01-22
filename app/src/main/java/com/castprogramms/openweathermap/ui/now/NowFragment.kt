@@ -1,7 +1,6 @@
 package com.castprogramms.openweathermap.ui.now
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.castprogramms.openweathermap.R
 import com.castprogramms.openweathermap.database.DataRepository
 import com.castprogramms.openweathermap.database.data.IconReform
-import com.castprogramms.openweathermap.database.data.weather.WeatherData
 import com.castprogramms.openweathermap.databinding.FragmentNowBinding
 import com.castprogramms.openweathermap.tools.WeatherConverter
-import java.lang.Exception
 
 class NowFragment : Fragment() {
 

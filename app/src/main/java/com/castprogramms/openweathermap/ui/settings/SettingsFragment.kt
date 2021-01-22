@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.edit
 import androidx.preference.PreferenceFragmentCompat
@@ -51,14 +52,24 @@ class SettingsFragment : PreferenceFragmentCompat(),
                         Manifest.permission.ACCESS_COARSE_LOCATION
                     ) != PackageManager.PERMISSION_GRANTED
                 ) {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.noGeolocation),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
                 LocationServices.getFusedLocationProviderClient(requireContext()).lastLocation.addOnCompleteListener {
                     if (it.result != null && it.isSuccessful) {
                         val location = it.result
 
+                        Toast.makeText(
+                            requireContext(),
+                            "${location.latitude} ${location.longitude}",
+                            Toast.LENGTH_LONG
+                        ).show()
                         DataRepository.QUERY_PARAM.locateFormat = LocateFormat.Geolocation(
-                            location?.latitude ?: 0.0,
-                            location?.longitude ?: 0.0
+                            location.latitude,
+                            location.longitude
                         )
                     }
                 }
@@ -88,7 +99,6 @@ class SettingsFragment : PreferenceFragmentCompat(),
         }
 
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

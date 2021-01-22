@@ -1,21 +1,18 @@
 package com.castprogramms.openweathermap.ui.day
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.castprogramms.openweathermap.R
 import com.castprogramms.openweathermap.database.DataRepository
 import com.castprogramms.openweathermap.database.data.IconReform
 import com.castprogramms.openweathermap.database.data.weather.BossForecastWeatherData
-import com.castprogramms.openweathermap.database.data.weather.ForecastWeatherData
 import com.castprogramms.openweathermap.databinding.FragmentNowBinding
 import com.castprogramms.openweathermap.tools.WeatherConverter
 import com.castprogramms.openweathermap.ui.week.WeekFragment
-import com.castprogramms.openweathermap.ui.week.WeekViewModel
 
 class DayFragment : Fragment() {
 

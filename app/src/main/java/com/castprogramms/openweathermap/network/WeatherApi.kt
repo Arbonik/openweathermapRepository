@@ -21,8 +21,8 @@ interface WeatherApi {
         @Query("appid") api : String = API_KEY) : Call<WeathermanResponse>
 
     @GET("weather")
-    fun weatherUnit(
-        @Query("lat")  lan : String,
+    fun weatherUnitByCoord(
+        @Query("lat")  lat : String,
         @Query("lon")  lon : String,
         @Query("lang") language : String = "ru",
         @Query("units") units : String = "metric",
@@ -37,7 +37,7 @@ interface WeatherApi {
         @Query("appid") api : String = API_KEY): Call<ForecastWeather>
 
     @GET("forecast")
-    fun forecastWeather(
+    fun forecastWeatherByCoord(
         @Query("lat")  lan : String,
         @Query("lon")  lon : String,
         @Query("lang") language : String = "ru",
