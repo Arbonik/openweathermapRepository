@@ -69,4 +69,6 @@
     <string name="city_delegate">Put City</string>
     <string name="logout">Logout</string>
     <string name="success_register">Account created!</string>
+    <string name="noGeolocation">geolocation not permission</string>
+    <string name="power_geolocation_alert">Enable geolocation!</string>
 </resources>

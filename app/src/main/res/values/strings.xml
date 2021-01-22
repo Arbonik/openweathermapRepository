@@ -98,4 +98,5 @@
     <string name="logout_key" translatable="false">logout_key</string>
     <string name="success_register">Вы успешно зарегестрированы!.</string>
     <string name="noGeolocation">Данные геолокации недоступны</string>
+    <string name="power_geolocation_alert">Включите геолокацию!</string>
 </resources>
