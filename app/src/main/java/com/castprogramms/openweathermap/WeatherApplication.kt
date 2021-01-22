@@ -35,9 +35,7 @@ class WeatherApplication : Application() {
         if (lang == osLang)
             lang = resources.configuration.locale.country
 
-
         loadSettings()
-
 
         languageConfiguration()
         Locale.setDefault(locale)
@@ -50,7 +48,9 @@ class WeatherApplication : Application() {
 
 
     private fun loadSettings() {
-//        SettingsFragment.updateSettings(sharedPreferences, resources)
+        SettingsFragment.langFormatFromSettings(sharedPreferences, resources)
+        SettingsFragment.tempFormatFromSettings(sharedPreferences, resources)
+        SettingsFragment.locateFormatFromSettings(sharedPreferences, applicationContext)
     }
 
     private fun languageConfiguration() {

@@ -1,6 +1,7 @@
 package com.castprogramms.openweathermap.ui.settings
 
 import android.Manifest
+import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Resources
@@ -21,59 +22,81 @@ class SettingsFragment : PreferenceFragmentCompat(),
     SharedPreferences.OnSharedPreferenceChangeListener {
 
     fun updateSettings(sharedPreferences: SharedPreferences, resources: Resources) {
-        DataRepository.QUERY_PARAM.langFormat =
-            when (sharedPreferences.getString(resources.getString(R.string.lang_key), "en")) {
-                "en" -> LangFormat.EN
-                "ru" -> LangFormat.RU
-                else -> LangFormat.EN
-            }
+        langFormatFromSettings(sharedPreferences, resources)
+        tempFormatFromSettings(sharedPreferences, resources)
+        locateFormatFromSettings(sharedPreferences, requireContext())
+    }
 
-        DataRepository.QUERY_PARAM.tempFormat =
-            when (sharedPreferences.getString(resources.getString(R.string.metric_key), "c")) {
-                "c" -> TempFormat.C
-                "f" -> TempFormat.F
-                "k" -> TempFormat.K
-                else -> TempFormat.C
-            }
-        when (sharedPreferences.getBoolean(resources.getString(R.string.geo_key), true)) {
-            true ->
-                DataRepository.QUERY_PARAM.locateFormat = LocateFormat.City(
-                    sharedPreferences.getString(
-                        resources.getString(R.string.city_key),
-                        "Moscow"
-                    ).toString()
-                )
-            false -> {
-                if (ActivityCompat.checkSelfPermission(
-                        requireContext(),
-                        Manifest.permission.ACCESS_FINE_LOCATION
-                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                        requireContext(),
-                        Manifest.permission.ACCESS_COARSE_LOCATION
-                    ) != PackageManager.PERMISSION_GRANTED
-                ) {
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.noGeolocation),
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-                LocationServices.getFusedLocationProviderClient(requireContext()).lastLocation.addOnCompleteListener {
-                    if (it.result != null && it.isSuccessful) {
-                        val location = it.result
-
+    companion object{
+        fun locateFormatFromSettings(
+            sharedPreferences: SharedPreferences,
+            context: Context
+        ) {
+            when (sharedPreferences.getBoolean(context.resources.getString(R.string.geo_key), true)) {
+                true ->
+                    DataRepository.QUERY_PARAM.locateFormat = LocateFormat.City(
+                        sharedPreferences.getString(
+                            context.resources.getString(R.string.city_key),
+                            "Moscow"
+                        ).toString()
+                    )
+                false -> {
+                    if (ActivityCompat.checkSelfPermission(
+                            context,
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                        ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                            context,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        ) != PackageManager.PERMISSION_GRANTED
+                    ) {
                         Toast.makeText(
-                            requireContext(),
-                            "${location.latitude} ${location.longitude}",
+                            context,
+                            context.getString(R.string.noGeolocation),
                             Toast.LENGTH_LONG
                         ).show()
-                        DataRepository.QUERY_PARAM.locateFormat = LocateFormat.Geolocation(
-                            location.latitude,
-                            location.longitude
-                        )
+                    }
+                    LocationServices.getFusedLocationProviderClient(context).lastLocation.addOnCompleteListener {
+                        if (it.result != null && it.isSuccessful) {
+                            val location = it.result
+
+                            Toast.makeText(
+                                context,
+                                "${location.latitude} ${location.longitude}",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            DataRepository.QUERY_PARAM.locateFormat = LocateFormat.Geolocation(
+                                location.latitude,
+                                location.longitude
+                            )
+                        }
                     }
                 }
             }
+        }
+
+        fun tempFormatFromSettings(
+            sharedPreferences: SharedPreferences,
+            resources: Resources
+        ) {
+            DataRepository.QUERY_PARAM.tempFormat =
+                when (sharedPreferences.getString(resources.getString(R.string.metric_key), "c")) {
+                    "c" -> TempFormat.C
+                    "f" -> TempFormat.F
+                    "k" -> TempFormat.K
+                    else -> TempFormat.C
+                }
+        }
+
+        fun langFormatFromSettings(
+            sharedPreferences: SharedPreferences,
+            resources: Resources
+        ) {
+            DataRepository.QUERY_PARAM.langFormat =
+                when (sharedPreferences.getString(resources.getString(R.string.lang_key), "en")) {
+                    "en" -> LangFormat.EN
+                    "ru" -> LangFormat.RU
+                    else -> LangFormat.EN
+                }
         }
     }
 
