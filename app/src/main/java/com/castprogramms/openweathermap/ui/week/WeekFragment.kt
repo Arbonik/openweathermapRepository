@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,16 +39,6 @@ class WeekFragment : Fragment() {
         }
         weekViewModel.downloadData()
 
-        requireActivity()
-            .onBackPressedDispatcher
-            .addCallback(this.viewLifecycleOwner, object : OnBackPressedCallback(true){
-                override fun handleOnBackPressed() {
-                    if (isEnabled){
-                        isEnabled = false
-                        requireActivity().onBackPressed()
-                    }
-                }
-            })
 
         return root
     }

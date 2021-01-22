@@ -19,7 +19,7 @@ class WeatherApiTest {
 
     @Test
     fun getForecastWeatherByCoordinates() {
-        var response = Reference.WHEATHER.forecastWeather(
+        var response = Reference.WHEATHER.forecastWeatherByCoord(
             "35.0",
             "35",
             QUERY_PARAM_COORDINATES.langFormat.format,

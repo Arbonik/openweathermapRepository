@@ -1,11 +1,9 @@
 package com.castprogramms.openweathermap.database
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.castprogramms.openweathermap.WeatherApplication
 import com.castprogramms.openweathermap.database.data.weather.ForecastWeatherAdapter
 import com.castprogramms.openweathermap.database.data.weather.ForecastWeatherData
-import com.castprogramms.openweathermap.database.data.weather.UnitSpecificCurrentWeatherEntry
 import com.castprogramms.openweathermap.database.data.weather.WeatherData
 import com.castprogramms.openweathermap.database.data.weather.forecast.ForecastWeather
 import com.castprogramms.openweathermap.database.data.weather.oneDay.WeathermanResponse
@@ -38,12 +36,10 @@ class DataRepository() : WeatherRepository {
                     QUERY_PARAM.tempFormat.format
                 )
             }
-            val weathermanResponse = response
-            Log.d("IS RESPONSE", weathermanResponse?.request()?.url().toString())
-            Log.d("IS RESPONSE", weathermanResponse.toString())
-            val r = weathermanResponse?.execute()?.body()
-            if (r != null)
-                database.insert(WeatherData(r))
+            val weathermanResponse = response?.execute()?.body()
+
+            if (weathermanResponse != null)
+                database.insert(WeatherData(weathermanResponse))
         } catch (e: IOException) {
         } catch (e: UnknownHostException) {
         }
