@@ -17,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 
-@Suppress("UNREACHABLE_CODE")
 class MainActivity : AppCompatActivity() {
 
 

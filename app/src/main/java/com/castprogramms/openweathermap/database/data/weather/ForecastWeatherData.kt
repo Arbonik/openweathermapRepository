@@ -1,8 +1,5 @@
 package com.castprogramms.openweathermap.database.data.weather
 
-import android.content.Context
-import android.os.Parcel
-import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.castprogramms.openweathermap.database.data.weather.forecast.ForecastWeather
@@ -24,13 +21,12 @@ data class ForecastWeatherData(
     var id: Int = 0
 }
 
-class BossForecastWeatherData(val forecastWeathersData: ForecastWeatherData, var context: Context
-          ) : UnitSpecificCurrentWeatherEntry{
+class BossForecastWeatherData(val forecastWeathersData: ForecastWeatherData) : UnitSpecificCurrentWeatherEntry{
     override val temperature: Double = forecastWeathersData.temperature
     override val conditionText: String = forecastWeathersData.conditionText
     override val conditionIconUrl: String = forecastWeathersData.conditionIconUrl
     override val windSpeed: Double = forecastWeathersData.windSpeed
-    override val windDirection: String = WeatherConverter.convertToWay(forecastWeathersData.windDirection.toDouble(), context)
+    override val windDirection: Int = WeatherConverter.convertToWay(forecastWeathersData.windDirection.toDouble())
     override val feelsLikeTemperature: Double = forecastWeathersData.feelsLikeTemperature
     override val visibilityDistance: Double = forecastWeathersData.visibilityDistance
 

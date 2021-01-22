@@ -13,7 +13,7 @@ data class WeatherData(
     override var conditionText: String = weathermanResponse.weather?.get(0)?.description ?: "",
     override var conditionIconUrl: String = weathermanResponse.weather?.get(0)?.icon ?: "",
     override var windSpeed: Double = weathermanResponse.wind.speed,
-    override var windDirection: String = weathermanResponse.wind.deg.toString(),
+    override var windDirection: Int = weathermanResponse.wind.deg.toInt(),
     override var feelsLikeTemperature: Double = weathermanResponse.main.feels_like,
     override var visibilityDistance: Double = weathermanResponse.visibility
 ) : UnitSpecificCurrentWeatherEntry {
@@ -29,7 +29,7 @@ data class WeatherData(
         forecastWeatherData.conditionText,
         forecastWeatherData.conditionIconUrl,
         forecastWeatherData.windSpeed,
-        forecastWeatherData.windDirection.toString(),
+        forecastWeatherData.windDirection.toInt(),
         forecastWeatherData.feelsLikeTemperature,
         forecastWeatherData.visibilityDistance
     )

@@ -87,5 +87,3 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
         var isNotFirstLaunchFrag = false
     }
 }
-
-//class MapViewModelFactory :

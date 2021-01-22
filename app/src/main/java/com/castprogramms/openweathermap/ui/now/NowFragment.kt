@@ -28,17 +28,11 @@ class NowFragment : Fragment() {
             ViewModelProvider(this).get(NowViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_now, container, false)
         val fragmentNowBinding = FragmentNowBinding.bind(root)
-            fragmentNowBinding.metric = DataRepository.QUERY_PARAM.tempFormat.name
+        fragmentNowBinding.metric = DataRepository.QUERY_PARAM.tempFormat.name
+
         nowViewModel.currentUnit.observe(viewLifecycleOwner) {
-            fragmentNowBinding.weatherData = it.apply {
-                try {
-                    this?.windDirection = WeatherConverter.convertToWay(
-                        this?.windDirection?.toDouble()!!,
-                        requireContext()
-                    )
-                } catch (e: Exception) {
-                }
-            }
+            fragmentNowBinding.weatherData = it
+            fragmentNowBinding.nowWind.setText(WeatherConverter.convertToWay(it?.windDirection?.toDouble() ?: 0.0))
             fragmentNowBinding.weatherIcon.setImageResource(
                 IconReform.icon[it?.conditionIconUrl] ?: R.drawable.calendar_24
             )

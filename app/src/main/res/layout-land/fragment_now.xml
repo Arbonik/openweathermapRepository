@@ -82,17 +82,6 @@
                     android:textColor="@color/txt_grey"
                     android:textSize="20sp" />
 
-                <!--<TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_weight="2"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="4dp"
-                    android:textColor="@color/txt_grey"
-                    android:textSize="20sp"
-                    tools:text="Влажность" />-->
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -114,19 +103,7 @@
                     android:text="Скорость ветра"
                     android:textColor="@color/txt_grey"
                     android:textSize="20sp" />
-                <!--
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="left"
-                                android:layout_weight="2"
-                                android:paddingTop="4dp"
-                                android:paddingBottom="4dp"
-                                android:textColor="@color/txt_grey"
-                                android:textSize="20sp"
-                                android:text="Осадки" />
-                -->
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -164,17 +141,6 @@
                     android:textSize="20sp"
                     tools:text="-20" />
 
-                <!--  <TextView
-                      android:id="@+id/now_wet"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_gravity="left"
-                      android:layout_weight="1"
-                      android:paddingTop="4dp"
-                      android:paddingBottom="4dp"
-                      android:textColor="@color/txt_grey"
-                      android:textSize="20sp"
-                      tools:text="90%" />-->
 
                 <TextView
                     android:id="@+id/now_wind"
@@ -186,7 +152,6 @@
                     android:paddingBottom="4dp"
                     android:textColor="@color/txt_grey"
                     android:textSize="20sp"
-                    android:text="@{weatherData.windDirection}"
                     tools:text="Ю-З" />
 
                 <TextView
@@ -201,19 +166,6 @@
                     android:text="@{Double.toString(weatherData.windSpeed).concat(@string/space).concat(@string/metric_wind_speed)}"                android:textSize="20sp"
                     tools:text="4 м/с" />
 
-                <!-- <TextView
-                     android:id="@+id/now_volume"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_gravity="left"
-                     android:layout_weight="1"
-                     android:paddingTop="4dp"
-                     android:text="@{Double.toString(weatherData.precipitationVolume).concat(@string/space).concat(@string/metric_height)}"
-                     android:paddingBottom="4dp"
-                     android:textColor="@color/txt_grey"
-                     android:textSize="20sp"
-                     tools:text="1000 мм" />
-     -->
                 <TextView
                     android:id="@+id/now_visibility"
                     android:layout_width="wrap_content"

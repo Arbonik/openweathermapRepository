@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,7 +16,7 @@ import com.castprogramms.openweathermap.ui.map.GeoTracker
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
-class GeoRepository(val context: Context) : GeoTracker, LocationListener{
+class GeoRepository(val context: Context) : GeoTracker, LocationListener {
 
     private val fusedLocationClient: FusedLocationProviderClient =
         LocationServices.getFusedLocationProviderClient(context)
@@ -32,7 +33,6 @@ class GeoRepository(val context: Context) : GeoTracker, LocationListener{
     }
 
     init {
-
         locationManager =
             context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
@@ -44,13 +44,13 @@ class GeoRepository(val context: Context) : GeoTracker, LocationListener{
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-
         } else {
             fusedLocationClient.lastLocation.addOnCompleteListener {
                 if (it.isSuccessful && it.result != null) {
                     geoCurrentPositionLive.value = it.result
+                    Log.d("Coocrd", "NewValue")
                 }
-                
+
             }
             locationManager.requestLocationUpdates(
                 LocationManager.GPS_PROVIDER,
@@ -61,8 +61,8 @@ class GeoRepository(val context: Context) : GeoTracker, LocationListener{
 
     }
 
-    fun stopListener(){
-
+    fun stopListener() {
+        locationManager.removeUpdates(this)
     }
 
     override fun onLocationChanged(location: Location) {
