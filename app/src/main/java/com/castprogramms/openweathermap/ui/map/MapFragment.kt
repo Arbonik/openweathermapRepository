@@ -1,11 +1,14 @@
 package com.castprogramms.openweathermap.ui.map
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.MainThread
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
@@ -56,25 +59,33 @@ class MapFragment : Fragment() {
             googleMap = map
             googleMap.isBuildingsEnabled = true
             googleMap.isIndoorEnabled = true
-
-            mapViewModel.mutableLiveDataThisPosition.observe(viewLifecycleOwner, {
+            if (ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ){}
+            if (mapViewModel.dataLiveData.value.isNullOrEmpty())
+            mapViewModel.gpsTracker.fusedLocationClient.lastLocation.addOnSuccessListener {
                 googleMap.addMarker(
                     MarkerOptions().position(LatLng(it.latitude, it.longitude))
                 )
-                googleMap.animateCamera(CameraUpdateFactory.newLatLng(LatLng(it.latitude, it.longitude)))
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(
-                    CameraPosition.fromLatLngZoom(LatLng(it.latitude, it.longitude), 18f)
-                ))
-            })
-
+                    CameraPosition.fromLatLngZoom(LatLng(it.latitude, it.longitude), 18f)))
+            }
             mapViewModel.dataLiveData.observe(viewLifecycleOwner, {
                 try {
-                    if (it.isEmpty()) {
+                    if (it.isEmpty() && mapViewModel.mutableLiveDataTracking.value!!) {
                         googleMap.clear()
-//                        val location = mapViewModel.mutableLiveDataThisPosition.value
-//                        googleMap.addMarker(MarkerOptions().position(LatLng(location?.latitude!!, location.longitude )))
-//                        googleMap.animateCamera(CameraUpdateFactory.newLatLng(LatLng(location.latitude, location.longitude)))
-                    }
+                        mapViewModel.gpsTracker.fusedLocationClient.lastLocation.addOnSuccessListener {
+                            googleMap.addMarker(
+                                MarkerOptions().position(LatLng(it.latitude, it.longitude))
+                            )
+                            googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(
+                                CameraPosition.fromLatLngZoom(LatLng(it.latitude, it.longitude), 18f)))
+                        }                    }
                     googleMap.addPolyline(
                         PolylineOptions().addAll(
                             mapViewModel.covertToLatLngList(
