@@ -8,34 +8,35 @@
             android:entryValues="@array/entry_values_lang"
             android:key="@string/lang_key"
             android:summary="@string/LangSummary"
+            android:defaultValue="default"
             android:title="@string/LangTitle" />
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/city_header">
 
         <SwitchPreferenceCompat
-            app:key="@string/geo_key"
-            android:summaryOn="@string/city_delegate"
+            android:defaultValue="true"
             android:summaryOff="@string/with_location"
-            />
+            android:summaryOn="@string/city_delegate"
+            app:key="@string/geo_key" />
 
         <EditTextPreference
-            app:defaultValue=""
+            app:defaultValue="Moscow"
             app:dependency="@string/geo_key"
             app:key="@string/city_key"
             app:summary="@string/your_city"
             app:title="@string/city_title"
-            android:defaultValue="Moscow"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/metric_header">
 
         <ListPreference
-            app:key="@string/metric_key"
             app:dialogTitle="@string/choose_metric"
             app:entries="@array/metric_names"
             app:entryValues="@array/entry_values_metric"
+            app:key="@string/metric_key"
+            android:defaultValue="c"
             app:title="@string/degrees" />
 
     </PreferenceCategory>

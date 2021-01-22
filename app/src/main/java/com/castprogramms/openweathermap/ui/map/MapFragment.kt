@@ -5,21 +5,26 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
+import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
 import com.castprogramms.openweathermap.R
+import com.castprogramms.openweathermap.WeatherApplication
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.lang.Exception
+
 
 class MapFragment : Fragment() {
 
-    private lateinit var mapViewModel: MapViewModel
+    private val mapViewModel: MapViewModel by viewModels()
     private lateinit var mapView: MapView
     private lateinit var googleMap: GoogleMap
 
@@ -28,67 +33,71 @@ class MapFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mapViewModel = ViewModelProvider(this).get(MapViewModel::class.java)
-        mapViewModel.updateLocationData()
         val view = inflater.inflate(R.layout.fragment_map, container, false)
         val fab = view.findViewById<FloatingActionButton>(R.id.fab)
-        if (mapViewModel.getIsFirstLaunchFrag())
-            mapViewModel.setIsTracking(true, requireContext())
 
         mapViewModel.mutableLiveDataTracking.observe(viewLifecycleOwner, {
-            if (it)
+            if (it) {
                 fab.setImageDrawable(resources.getDrawable(R.drawable.location_off))
-            else
+                fab.setOnClickListener {
+                    mapViewModel.stopTracking()
+                }
+            } else {
                 fab.setImageDrawable(resources.getDrawable(R.drawable.add_location))
+                fab.setOnClickListener {
+                    mapViewModel.startTracking()
+                }
+            }
         })
-        fab.setOnClickListener {
-            mapViewModel.setIsTracking(!mapViewModel.isTracking, requireContext())
-        }
         mapView = view.findViewById(R.id.mapView)
         mapView.onCreate(savedInstanceState)
         mapView.onResume()
         mapView.getMapAsync { map ->
             googleMap = map
-            mapViewModel.mutableLiveLocations.observe(viewLifecycleOwner, {
+            googleMap.isBuildingsEnabled = true
+            googleMap.isIndoorEnabled = true
+
+            mapViewModel.mutableLiveDataThisPosition.observe(viewLifecycleOwner, {
+                googleMap.addMarker(
+                    MarkerOptions().position(LatLng(it.latitude, it.longitude))
+                )
+                googleMap.animateCamera(CameraUpdateFactory.newLatLng(LatLng(it.latitude, it.longitude)))
+                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(
+                    CameraPosition.fromLatLngZoom(LatLng(it.latitude, it.longitude), 18f)
+                ))
+            })
+
+            mapViewModel.dataLiveData.observe(viewLifecycleOwner, {
                 try {
-                    mapViewModel.mutableLiveDataThisPosition.observe(viewLifecycleOwner, {
-                        googleMap.addMarker(
-                            MarkerOptions().position(
-                                LatLng(
-                                    it.latitude,
-                                    it.longitude
-                                )
-                            )
-                        )
-                        googleMap.moveCamera(
-                            CameraUpdateFactory.newCameraPosition(
-                                CameraPosition(
-                                    LatLng(it.latitude, it.longitude),
-                                    18f, 0f, 0f
-                                )
-                            )
-                        )
-                    })
-                    if (it.isEmpty())
+                    if (it.isEmpty()) {
                         googleMap.clear()
-                    it.forEach {
-                        googleMap.setMinZoomPreference(0.01f)
-                        googleMap.moveCamera(
-                            CameraUpdateFactory.newCameraPosition(
-                                CameraPosition(
-                                    LatLng(it.latitude, it.longitude),
-                                    18f, 0f, 0f
-                                )
+//                        val location = mapViewModel.mutableLiveDataThisPosition.value
+//                        googleMap.addMarker(MarkerOptions().position(LatLng(location?.latitude!!, location.longitude )))
+//                        googleMap.animateCamera(CameraUpdateFactory.newLatLng(LatLng(location.latitude, location.longitude)))
+                    }
+                    googleMap.addPolyline(
+                        PolylineOptions().addAll(
+                            mapViewModel.covertToLatLngList(
+                                it
                             )
                         )
-                    }
-                    googleMap.addPolyline(PolylineOptions().addAll(mapViewModel.covertToLatLngList(it)))
+                    )
+                    googleMap.setMinZoomPreference(0.01f)
+                    googleMap.animateCamera(
+                        CameraUpdateFactory.newCameraPosition(
+                            CameraPosition(
+                                LatLng(
+                                    it.last().latitude, it.last().longitude
+                                ),
+                                18f, 0f, 0f
+                            )
+                        )
+                    )
                 } catch (e: Exception) {
+                    Log.e("Test", e.message.toString())
                 }
             })
         }
         return view
     }
-
-
 }
