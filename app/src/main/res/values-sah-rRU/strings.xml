@@ -51,4 +51,6 @@
     <string name="sever_zapad">Северо-западный</string>
     <string name="logout">Выйти</string>
     <string name="success_register">Вы успешно зарегестрированы!.</string>
+    <string name="noGeolocation">Данные геолокации недоступны</string>
+    <string name="power_geolocation_alert">Включите геолокацию!</string>
 </resources>
