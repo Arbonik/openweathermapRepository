@@ -6,10 +6,13 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
+import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.castprogramms.openweathermap.R
 import com.castprogramms.openweathermap.WeatherApplication
 import com.castprogramms.openweathermap.database.data.map.MyLocation
 import com.castprogramms.openweathermap.ui.map.GeoTracker
@@ -76,5 +79,18 @@ class GeoRepository(val context: Context) : GeoTracker, LocationListener {
         GlobalScope.launch(Dispatchers.IO) {
             WeatherApplication.database.locationDao().addLocation(MyLocation(location))
         }
+    }
+
+    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+//        super.onStatusChanged(provider, status, extras)
+    }
+
+    override fun onProviderEnabled(provider: String) {
+//        super.onProviderEnabled(provider)
+    }
+
+    override fun onProviderDisabled(provider: String) {
+        Toast.makeText(context, context.getString(R.string.power_geolocation_alert), Toast.LENGTH_LONG).show()
+//        super.onProviderDisabled(provider)
     }
 }

@@ -8,13 +8,11 @@
     <fragment
         android:id="@+id/navigation_now"
         android:name="com.castprogramms.openweathermap.ui.now.NowFragment"
-        android:label="@string/title_now"
         tools:layout="@layout/fragment_now" />
 
     <fragment
         android:id="@+id/navigation_week"
         android:name="com.castprogramms.openweathermap.ui.week.WeekFragment"
-        android:label="@string/title_week"
         tools:layout="@layout/fragment_week" >
         <action
             android:id="@+id/action_navigation_week_to_dayFragment"
@@ -25,16 +23,13 @@
     <fragment
         android:id="@+id/navigation_map"
         android:name="com.castprogramms.openweathermap.ui.map.MapFragment"
-        android:label="@string/title_map"
         tools:layout="@layout/fragment_map" />
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.castprogramms.openweathermap.ui.settings.SettingsFragment"
-        android:label="@string/title_settings"
         tools:layout="@layout/settings_fragment" />
     <fragment
         android:id="@+id/dayFragment"
         android:name="com.castprogramms.openweathermap.ui.day.DayFragment"
-        android:label="@string/title_day"
         tools:layout="@layout/fragment_now" />
 </navigation>

@@ -1,23 +1,15 @@
 package com.castprogramms.openweathermap
 
-import android.app.ActionBar.DISPLAY_SHOW_TITLE
 import android.os.Build
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toolbar
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.ActionBar.DISPLAY_SHOW_TITLE
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.MenuItemCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         requestPermissions(
             arrayOf(
                 android.Manifest.permission.ACCESS_FINE_LOCATION,
@@ -56,6 +47,10 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    fun setNewTitle(title : String) {
+        setTitle(title)
     }
 
 
