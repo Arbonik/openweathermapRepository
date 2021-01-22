@@ -18,6 +18,8 @@ import com.castprogramms.openweathermap.database.data.map.MyLocation
 import com.castprogramms.openweathermap.ui.map.GeoTracker
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.CancellationToken
+import com.google.android.gms.tasks.OnTokenCanceledListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -25,17 +27,17 @@ import kotlinx.coroutines.launch
 class GeoRepository(val context: Context) : GeoTracker, LocationListener {
 
     val isListenerActive: MutableLiveData<Boolean> = MutableLiveData(false)
-    private val fusedLocationClient: FusedLocationProviderClient =
-        LocationServices.getFusedLocationProviderClient(context)
+    lateinit var fusedLocationClient: FusedLocationProviderClient
     private var locationManager: LocationManager
     private val geoCurrentPositionLive = MutableLiveData<Location>()
     override val currentGeoPosition: LiveData<Location> = geoCurrentPositionLive
 
 
     init {
+        fusedLocationClient =
+            LocationServices.getFusedLocationProviderClient(context)
         locationManager =
             context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
         if (ActivityCompat.checkSelfPermission(
                 context,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -44,14 +46,15 @@ class GeoRepository(val context: Context) : GeoTracker, LocationListener {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-        } else {
-            fusedLocationClient.lastLocation.addOnCompleteListener {
+        }
+        fusedLocationClient.lastLocation.addOnCompleteListener {
                 if (it.isSuccessful && it.result != null) {
                     geoCurrentPositionLive.value = it.result
                 }
-
+                else
+                    Log.e("Test", it.exception?.localizedMessage.toString())
             }
-        }
+
     }
     fun startListener(){
         if (ActivityCompat.checkSelfPermission(
