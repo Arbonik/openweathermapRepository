@@ -24,6 +24,7 @@ class NowFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         nowViewModel =
             ViewModelProvider(this).get(NowViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_now, container, false)
