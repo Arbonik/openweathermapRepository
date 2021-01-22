@@ -1,31 +1,63 @@
 package com.castprogramms.openweathermap
 
-import com.castprogramms.openweathermap.database.data.weather.forecast.ForecastWeather
 import com.castprogramms.openweathermap.network.*
 import com.castprogramms.openweathermap.network.Reference
 import org.junit.Test
 
 class WeatherApiTest {
 
-    val QUERY_PARAM = QueryParam(
+    val QUERY_PARAM_COORDINATES = QueryParam(
+        LangFormat.EN,
+        TempFormat.C,
+        LocateFormat.Geolocation(35.0, 139.0)
+    )
+    val QUERY_PARAM_CITY = QueryParam(
         LangFormat.EN,
         TempFormat.C,
         LocateFormat.City("Moscow")
     )
 
     @Test
-    fun getOneDayWeather() {
-        var response = Reference.WHEATHER.weatherUnit(QUERY_PARAM).execute().body()
-        println(response.toString())
+    fun getForecastWeatherByCoordinates() {
+        var response = Reference.WHEATHER.forecastWeatherByCoord(
+            "35.0",
+            "35",
+            QUERY_PARAM_COORDINATES.langFormat.format,
+            QUERY_PARAM_COORDINATES.tempFormat.format,
+            40,
+            API_KEY
+        )
+        println(response.request().url().toString())
+        println(response.execute().body())
+        println(response)
+        println(response)
+    }
+    @Test
+    fun getForecastWeatherByCity() {
+        var response = Reference.WHEATHER.forecastWeather(
+            (QUERY_PARAM_CITY.locateFormat as LocateFormat.City).city,
+            QUERY_PARAM_CITY.langFormat.format,
+            QUERY_PARAM_CITY.tempFormat.format,
+            40,
+            API_KEY
+        )
+        println(response.request().url().toString())
+        println(response.execute().body())
+        println(response)
+        println(response)
+    }
+    @Test
+    fun getOneDayWeatherByCity() {
+        var response = Reference.WHEATHER.weatherUnit(
+            (QUERY_PARAM_CITY.locateFormat as LocateFormat.City).city,
+            QUERY_PARAM_CITY.langFormat.format,
+            QUERY_PARAM_CITY.tempFormat.format,
+            API_KEY
+        )
+        println(response.request().url().toString())
+        println(response.execute().body())
+        println(response)
+        println(response)
     }
 
-    @Test
-    fun getSevenDayWeather() {
-        val QUANTITY = 7
-        var response : ForecastWeather? =
-            Reference.WHEATHER.forecastWeather("Moscow", QUANTITY).execute().body()
-        response?.list?.forEach {
-            println(it)
-        }
-    }
 }

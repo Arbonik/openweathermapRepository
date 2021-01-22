@@ -1,6 +1,7 @@
 package com.castprogramms.openweathermap.ui.now
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.castprogramms.openweathermap.WeatherApplication
@@ -11,13 +12,14 @@ import kotlinx.coroutines.launch
 class NowViewModel : ViewModel() {
 
 
-    private var _currentUnit = WeatherApplication.database.weatherDao().getWeathersUnit()
+    private var _currentUnit : MutableLiveData<WeatherData?> = MutableLiveData<WeatherData?>()
 
     val currentUnit: LiveData<WeatherData?> = _currentUnit
 
     fun downloadData(){
         viewModelScope.launch(Dispatchers.IO) {
-            WeatherApplication.repository.getCurrentUnitWeather()
+            val item = WeatherApplication.repository.getCurrentUnitWeather()
+            _currentUnit.postValue(item)
         }
     }
 }

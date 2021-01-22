@@ -97,4 +97,5 @@
     <string name="logout">Выйти</string>
     <string name="logout_key" translatable="false">logout_key</string>
     <string name="success_register">Вы успешно зарегестрированы!.</string>
+    <string name="noGeolocation">Данные геолокации недоступны</string>
 </resources>

@@ -6,7 +6,7 @@ interface UnitSpecificCurrentWeatherEntry {
     val conditionText: String
     val conditionIconUrl: String
     val windSpeed: Double
-    val windDirection: String
+    val windDirection: Int
     val feelsLikeTemperature: Double
     val visibilityDistance: Double
 }

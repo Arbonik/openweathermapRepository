@@ -14,18 +14,19 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import java.util.function.Consumer
 
-class MyLocationListener(var viewModel: MapViewModel): LocationListener {
+class MyLocationListener: LocationListener {
     var imHere: Location? = null
     lateinit var locationManager: LocationManager
     override fun onLocationChanged(location: Location) {
         imHere = location
-        viewModel.addLocation(imHere!!)
     }
     companion object {
-        fun setUpLocationListener(context: Context, viewModel: MapViewModel): MyLocationListener {
-            val locationListener = MyLocationListener(viewModel)
+        fun setUpLocationListener(context: Context): MyLocationListener {
+            val locationListener = MyLocationListener()
+
             locationListener.locationManager =
                 context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
             if (ActivityCompat.checkSelfPermission(
                     context,
                     Manifest.permission.ACCESS_FINE_LOCATION

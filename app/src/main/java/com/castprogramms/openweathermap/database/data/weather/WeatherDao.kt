@@ -19,7 +19,7 @@ interface WeatherDao {
     suspend fun insert(unitSpecificCurrentWeatherEntry: WeatherData)
 
     @Query("SELECT * FROM weatherData ORDER BY id DESC LIMIT 1")
-    fun getWeathersUnit():LiveData<WeatherData?>
+    fun getWeathersUnit():WeatherData?
 
     @Query("SELECT * FROM forecastWeatherData ORDER BY id DESC LIMIT 30")
     fun getForecastWeatherData():LiveData<List<ForecastWeatherData?>>

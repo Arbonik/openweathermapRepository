@@ -149,7 +149,6 @@
                 android:layout_weight="1"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp"
-                android:text="@{weatherData.windDirection}"
                 android:textColor="@color/txt_grey"
                 android:textSize="20sp"
                 tools:text="Ю-З" />
