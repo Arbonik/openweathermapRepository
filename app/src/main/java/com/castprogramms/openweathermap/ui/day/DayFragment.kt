@@ -48,6 +48,8 @@ class DayFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
+        val number : Int = arguments?.getInt(WeekFragment.ITEM_NUMBER_TAG) ?: 0
+        viewModel.load(number)
         val locate = DataRepository.QUERY_PARAM.locateFormat
         when (locate){
             is LocateFormat.City ->  (requireActivity() as MainActivity).setNewTitle(locate.city)

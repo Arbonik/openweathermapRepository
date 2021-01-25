@@ -42,32 +42,14 @@ class SimpleEntityReadWriteTest {
     fun closeDb() {
         db.close()
     }
-
 //    @Test
-//    @Throws(Exception::class)
-//    fun writeUserAndReadInList() {
-//        val user: WeathermanResponse = WeathermanResponse(id = 1).apply {
-//            weather = listOf(Weather(id = 123).apply {
-//                weatherid = 1
-//            })
+//    @Throws(java.lang.Exception::class)
+//    fun writeUserAndReadLocation(){
+//        val myLocation = MyLocation(53.36, 83.76)
+//        corotineScope.launch {
+//            locationDao.addLocation(myLocation)
+//            val locations = locationDao.getAllLocation()
+//            assertThat(myLocation, equalTo(locations[0]))
 //        }
-//        weatherDao.insert(user)
-//        weatherDao.insert(user.weather)
-//
-//        val weathermanResponse = weatherDao.getWeathersResponse()
-//        val weather = weatherDao.getWeathers(1)
-//        weathermanResponse[0].weather = weather
-//        assertThat(user, equalTo(weathermanResponse[0]))
 //    }
-
-    @Test
-    @Throws(java.lang.Exception::class)
-    fun writeUserAndReadLocation(){
-        val myLocation = MyLocation(53.36, 83.76)
-        corotineScope.launch {
-            locationDao.addLocation(myLocation)
-            val locations = locationDao.getAllLocation()
-            assertThat(myLocation, equalTo(locations[0]))
-        }
-    }
 }
