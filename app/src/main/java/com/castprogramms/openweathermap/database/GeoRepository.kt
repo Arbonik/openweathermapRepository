@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 class GeoRepository(val context: Context) : GeoTracker, LocationListener {
 
     val isListenerActive: MutableLiveData<Boolean> = MutableLiveData(false)
-    lateinit var fusedLocationClient: FusedLocationProviderClient
+    var fusedLocationClient: FusedLocationProviderClient
     private var locationManager: LocationManager
     private val geoCurrentPositionLive = MutableLiveData<Location>()
     override val currentGeoPosition: LiveData<Location> = geoCurrentPositionLive
@@ -68,7 +68,7 @@ class GeoRepository(val context: Context) : GeoTracker, LocationListener {
         }
         locationManager.requestLocationUpdates(
             LocationManager.GPS_PROVIDER,
-            5000, 10f, this
+            1000, 5f, this
         )
         isListenerActive.postValue(true)
     }

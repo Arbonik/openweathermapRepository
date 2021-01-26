@@ -61,5 +61,6 @@ class MainActivity : AppCompatActivity() {
             findNavController(R.id.nav_host_fragment).navigateUp()
         return super.onOptionsItemSelected(item)
     }
+
 }
 
